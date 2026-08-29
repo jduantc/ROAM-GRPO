@@ -11,19 +11,19 @@ Code for ROAM-GRPO (Routed Off-mode Approach Mining for GRPO).
 ```
 ROAM-GRPO/
 ├── roam/                          # Core algorithm
-│   ├── train.py                   # Main GRPO + ROAM training script
+│   ├── train.py                   # GRPO + ROAM training script
 │   ├── routed_offmode.py           # ROAM loss, routing, off-mode mining, self-distillation
-│   ├── distinctness_prompt.py      # LLM judge prompt for method-distinctness scoring
-│   ├── validity_prompt.py         # LLM judge prompt for reasoning-soundness audit
+│   ├── distinctness_prompt.py      # LLM judge prompt (distinctness scoring)
+│   ├── validity_prompt.py         # LLM judge prompt (reasoning-soundness)
 │   ├── run_grpo.sh                # Training launch script
 │   └── trl_timeout_patch.py       # Timeout patch for TRL training loop
 ├── eval/                          # Evaluation
 │   ├── passk_eval.py              # pass@k evaluation with vLLM serving
-│   ├── vllm_serve_lora.py         # vLLM server with LoRA hot-loading (TRL derivative, Apache-2.0)
-│   └── recompute_diversity.py     # Offline diversity recompute + embedding persistence
+│   ├── vllm_serve_lora.py         # vLLM server with LoRA hot-loading
+│   └── recompute_diversity.py     # Embedding/diversity computation offline
 ├── figures/                       # Paper figure scripts
 │   ├── curves_r1.py               # Training-curve figure (pass@1/16, dispersion)
-│   └── fig_exemplar.py            # Per-problem exemplar panels (annotated + clean)
+│   └── fig_exemplar.py            # Per-problem exemplars
 └── data/                          # Datasets
     ├── math_train_l5_sub1000.jsonl     # Training set: 1000 MATH Level-5 problems
     ├── math_eval.jsonl                 # Eval set: 400 MATH Level-5 test problems
