@@ -6,7 +6,7 @@ arithmetic slips, and conclusions that don't follow from the steps shown.
 This module is imported by routed_offmode.py at training time.
 """
 VALIDITY = (
-    "Audit the reasoning in the following solution. Be concise -- at most 5 short lines.\n\n"
+    "Audit the reasoning in the following solution. Be concise (at most 5 short lines).\n\n"
     "PROBLEM:\n{problem}\n\n"
     "SOLUTION TO AUDIT:\n{b}\n\n"
     "Check specifically for:\n"
