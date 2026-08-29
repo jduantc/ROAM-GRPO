@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Orchestrate a full server-mode GRPO + ROAM comparison run.
+# Orchestrate a full server-mode GRPO + ROAM `comparison run.
 #
 #   GPU GEN_GPU    : policy generation server   (TRL vllm-serve, weight-synced)
 #   GPU TAU_GPU    : verifier tau server         (TRL vllm-serve, judge model)
