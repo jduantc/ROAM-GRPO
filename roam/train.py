@@ -45,7 +45,7 @@ CFG = dict(
     prompts_per_step=1,
     num_epochs=4,
     learning_rate=1e-5,
-    lr_scheduler_type="linear",
+    lr_scheduler_type="constant",
     lora_r=8, lora_alpha=16,
     beta_kl=0.0,
     max_new_tokens=3072,
@@ -746,8 +746,7 @@ def main():
     pt.add_argument("--num_epochs", type=float, default=CFG["num_epochs"])
     pt.add_argument("--learning_rate", type=float, default=CFG["learning_rate"])
     pt.add_argument("--lr_scheduler", default=CFG["lr_scheduler_type"],
-                    help="HF lr_scheduler_type: 'linear' (default, decay to 0) or 'constant' "
-                         "(phase-2 continuations that test collapse under sustained-LR fine-tuning).")
+                    help="HF lr_scheduler_type: ''constant' or linear (decay)")
     pt.add_argument("--dataset_path", default=CFG["dataset_path"],
                     help="training jsonl (needs problem, gold, schema_id columns)")
     pt.add_argument("--init_adapter", default=None,
