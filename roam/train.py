@@ -545,6 +545,19 @@ def build_prompt_column(tokenizer, problem):
                                           enable_thinking=ENABLE_THINKING)
 
 
+_SCAFFOLD_METHOD2_HDR = "Method 2 (a genuinely different approach):\n"
+
+
+def build_scaffold_prompt_column(tokenizer, problem, method1_seed):
+    """Teacher prompt for off-mode mining: prefill starts the assistant turn with
+    Method 1 so the model must continue with Method 2."""
+    msgs = [{"role": "user", "content":
+             problem + "\n\nProvide a solution. Put the final answer in \\boxed{}."}]
+    base = tokenizer.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True,
+                                         enable_thinking=ENABLE_THINKING)
+    return base + f"Method 1: {method1_seed}\n\n{_SCAFFOLD_METHOD2_HDR}"
+
+
 def train(args, cfg):
     run_name = args.run_name or f"grpo_{cfg['validity_gate_mode']}"
     if args.no_wandb:
@@ -746,7 +759,7 @@ def main():
     pt.add_argument("--num_epochs", type=float, default=CFG["num_epochs"])
     pt.add_argument("--learning_rate", type=float, default=CFG["learning_rate"])
     pt.add_argument("--lr_scheduler", default=CFG["lr_scheduler_type"],
-                    help="HF lr_scheduler_type: ''constant' or linear (decay)")
+                    help="HF lr_scheduler_type: ''constant'")
     pt.add_argument("--dataset_path", default=CFG["dataset_path"],
                     help="training jsonl (needs problem, gold, schema_id columns)")
     pt.add_argument("--init_adapter", default=None,
