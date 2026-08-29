@@ -1,0 +1,14 @@
+torch>=2.0
+transformers>=4.57
+trl>=1.4.0
+vllm>=0.19.1
+peft
+accelerate
+datasets
+sentence-transformers
+sympy
+requests
+numpy
+scipy
+scikit-learn
+matplotlib
