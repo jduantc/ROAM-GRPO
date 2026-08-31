@@ -2,8 +2,6 @@
   "problem_id": "omni/HMMT_2/246",
   "problem": "Compute $$\\sum_{n_{60}=0}^{2} \\sum_{n_{59}=0}^{n_{60}} \\cdots \\sum_{n_{2}=0}^{n_{3}} \\sum_{n_{1}=0}^{n_{2}} \\sum_{n_{0}=0}^{n_{1}} 1$$",
   "gold": "1953",
-  "grpo": "passk16_OMNImid_vanS1_A/van_s1_g4500",
-  "roam": "passk16_OMNImid_roams1_g5000_ck1000/roams1_g5000_ck1000 (delayed-ROAM, global 6000)",
   "completions": [
     {
       "label": "G0",
