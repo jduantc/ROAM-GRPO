@@ -24,6 +24,7 @@ ROAM-GRPO/
 ├── figures/                       # Paper figure scripts
 │   ├── curves_r1.py               # Training-curve figure (pass@1/16, dispersion)
 │   └── fig_exemplar.py            # Per-problem exemplars
+└── example_completions/           # Completions used for diagrams in paper
 └── data/                          # Datasets
     ├── math_train_l5_sub1000.jsonl     # Training set: 1000 MATH Level-5 problems
     ├── math_eval.jsonl                 # Eval set: 400 MATH Level-5 test problems
