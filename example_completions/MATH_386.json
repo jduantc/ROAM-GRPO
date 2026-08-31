@@ -2,8 +2,6 @@
   "problem_id": "test/intermediate_algebra/386.json",
   "problem": "Let $0 \\le x \\le 1.$  Find the maximum value of\n\\[x (1 - x)^5.\\]",
   "gold": "\\frac{3125}{46656}",
-  "grpo": "passk16_van2b_c1_s1_p2_ck2500/van2b_c1_s1_p2_ck2500 (global 5000)",
-  "roam": "passk16_arm2b_c1_mc8_p3_ck500/arm2b_c1_mc8_p3_ck500 (ROAM, global 4500)",
   "completions": [
     {
       "label": "G0",

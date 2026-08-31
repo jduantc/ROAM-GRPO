@@ -2,8 +2,6 @@
   "problem_id": "test/intermediate_algebra/35.json",
   "problem": "Find the largest value of $x$ for which\n\\[x^2 + y^2 = x + y\\]has a solution, if $x$ and $y$ are real.",
   "gold": "\\frac{1 + \\sqrt{2}}{2}",
-  "grpo": "passk16_van2b_c1_s1_p2_ck2500/van2b_c1_s1_p2_ck2500 (GRPO, global 5000)",
-  "roam": "passk16_arm2b_c1_mc8_p3_ck500/arm2b_c1_mc8_p3_ck500 (ROAM, global 4500)",
   "completions": [
     {
       "label": "G0",
