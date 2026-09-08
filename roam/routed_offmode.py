@@ -18,9 +18,9 @@ MARKER_RE = re.compile(r"\b(wait|hmm|let me re-?(check|evaluate|examine|derive|c
 STASH: list = []
 
 
-def stash_group(problem, gold, completions, tier1, schema_id=None):
+def stash_group(problem, gold, completions, tier1):
     STASH.append(dict(problem=problem, gold=gold, completions=list(completions),
-                      tier1=list(tier1), schema_id=schema_id))
+                      tier1=list(tier1)))
 
 
 class RoutedBCMixin:
@@ -164,7 +164,7 @@ class RoutedBCMixin:
         return _think + t          # _think is "" when thinking is off
 
     # in-loop distinctness judge 
-    def _rbc_judge(self, problem, modal, cands, schema_id):
+    def _rbc_judge(self, problem, modal, cands):
         """Judge cands against modal and return [(cand, score)] for the distinct ones.
         """
         if not cands:
@@ -329,21 +329,15 @@ class RoutedBCMixin:
             self.rbc_stats["bc_modal"] += 1
             cands = self._rbc_harvest(rec, modal)
             # judge against the modal
-            verdicts = self._rbc_judge(rec["problem"], mclean, cands, rec.get("schema_id"))
+            verdicts = self._rbc_judge(rec["problem"], mclean, cands)
             with open(self.rbc_queue, "a") as f:                # append-only audit trail, not a source
                 for c, sc in verdicts:
                     f.write(json.dumps(dict(key=self._key(rec["problem"], c), step=self.rbc_stats["steps"],
-                                            problem=rec["problem"], modal=mclean, cand=c, score=sc,
-                                            schema_id=rec.get("schema_id"))) + "\n")
-            # Only JUDGED-DISTINCT candidates are trained on, and only ONE per routed group per step
-            # (cap=2 overall: 1 modal + 1 distinct). This fixes the modal:distinct ratio at 1:1 rather
-            # than letting it drift with harvest yield, bounds the extra forward/backward passes, and
-            # keeps the dose inside Thread A's validated <=K=4 (1 per encounter x 3 epochs).
-            # Prefer a candidate NOT already trained on, so the 3 encounters teach 3 different
-            # methods; among those, take the most distinct (lowest same-method score).
-            # Candidates are this step's own harvest, judged this step. `used` still rotates the
-            # target across a problem's 3 encounters so they teach 3 methods, not one method 3x,
-            # but it only ever filters within a freshly generated set.
+                                            problem=rec["problem"], modal=mclean, cand=c, score=sc)) + "\n")
+            # Only judged distinct candidates are trained on, and one per routed group per step
+            # (cap=2 overall: 1 modal + 1 distinct). 
+            # "used/unused" watches out in case a generated output's 400-char prefix matches one that was previously
+            # trained on, to make sure training is performed on fresh text. In practice this rarely ever fires
             unused = [(c, sc) for c, sc in verdicts if self._thash(c) not in used]
             pool = unused or verdicts
             if pool:
